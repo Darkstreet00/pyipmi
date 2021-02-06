@@ -6,11 +6,11 @@ This script can control fans with ipmi.
 
 You have to install `ipmitool` before you can use this script!
  
- ######Debian/Ubuntu 
+ ###### Debian/Ubuntu 
 `sudo apt install ipmitool`
- ######Fedora
+ ###### Fedora
 `sudo dnf install ipmitool`
- ######Arch
+ ###### Arch
 `sudo pacman -S ipmitool`
 
 
