@@ -26,7 +26,6 @@ Set fans to 25% speed.
 Set fans to 50% speed.
 Set fans to 75% speed.
 Set fans to 100% speed.
-Set fans to custom speed.
 Turn off All fans.
 ```
 
