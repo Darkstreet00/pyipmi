@@ -6,6 +6,10 @@ This script can control fans with ipmi.
 
 You have to install `ipmitool` before you can use this script!
 
+## Usage
+
+`python3 ipmi.py`
+
 ## Features
 ```
 Turn off Automatic ventilation control.
