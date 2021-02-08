@@ -36,6 +36,7 @@ All Dell poweredge server!
 Dell Poweredge R410
 Dell Poweredge R510
 Dell Poweredge R710
+Dell Poweredge R720
 ```
 
 ## OS Support:
