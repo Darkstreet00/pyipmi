@@ -67,6 +67,10 @@ def ipmitool(args):
     os.system('ipmitool -I lanplus -H ' + ip + ' -U ' + user + ' -P ' + password.decode('utf-8') + ' raw ' + args + ' 2>/dev/null' )
     return '1'
 
+def custom_ipmi(args):
+    os.system('ipmitool -I lanplus -H ' + ip + ' -U ' + user + ' -P ' + password.decode('utf-8') + ' raw ' + '0x30 0x30 0x02 0xff 0x' + args + ' 2>/dev/null' )
+    return '1'
+
 ## Menu1 ##
 
 def main_menu():
@@ -87,6 +91,7 @@ def fan_menu():
         print (16 * ' ' + "(3)" + 6 * ' ' + "Set Fan speed to 50%" )
         print (16 * ' ' + "(4)" + 6 * ' ' + "Set Fan speed to 75%" )
         print (16 * ' ' + "(5)" + 6 * ' ' + "Set Fan speed to 100%" )
+        print (16 * ' ' + "(6)" + 7 * ' ' + "Custom speed(0-100)" )
         print (16 * ' ' + "(98)" + 11 * ' ' + "Back")
         print (16 * ' ' + "(99)" + 11 * ' ' + "Quit")
         print (color_text(GREEN,64 * "-"))
@@ -151,6 +156,40 @@ if stat == 1:
                 os.system('clear')
                 ipmitool('0x30 0x30 0x02 0xff 0x64')
                 print(color_text(YELLOW,22 * "-" + "Fan Speed set to 100%" + 21 * "-"))
+
+            elif inp == '6':
+                loop2 = True
+                while loop2:
+                    os.system('clear')
+                    print (color_text(GREEN,27 * "-" + "Custom speed" + 25 * "-"))
+                    inp = input(color_text(GREEN,"> "))
+                    try:
+                        if int(inp) in range(0, 101):
+                            output = hex(int(inp)).split('x')[-1]
+                            custom_ipmi(output)
+                            if output == '64':
+                                os.system('clear')
+                                print(color_text(YELLOW,22 * "-" + "Fan Speed set to 100%" + 21 * "-"))
+                                loop2 = False
+                            else:
+                                os.system('clear')
+                                print(color_text(YELLOW,23 * "-" + "Fan Speed set to " + inp + "%" + 21 * "-"))
+                                loop2 = False
+
+                        elif inp == '999':
+                            os.system('clear')
+                            loop2 = False
+
+                        else:
+                            os.system('clear')
+                            print(color_text(RED,16 * "-" + "Select a number between 0 and 100" + 15 * "-"))
+                            time.sleep(1.4)
+                            loop2 = True
+                    except ValueError:
+                        os.system('clear')
+                        print(color_text(RED,21 * "-" + "Only numbers are allowed" + 19 * "-"))
+                        time.sleep(1.4)
+                        loop2 = True
             
             elif inp == '98':
                 os.system('clear')
@@ -160,6 +199,13 @@ if stat == 1:
                 print (color_text(GREEN,30 * "-") + (color_text(RED,'Quit')) + (color_text(GREEN,30 * "-")))
                 time.sleep(0.1)
                 loop = False
+            
+            else:
+                os.system('clear')
+                print(color_text(GREEN,26 * "-") + (color_text(RED,'Invalid Input')) + (color_text(GREEN,25 * "-")))
+                time.sleep(0.2)
+                loop = True
+
         
         elif ans == '2':
             os.system('clear')
@@ -184,6 +230,12 @@ if stat == 1:
                 os.system('clear')
                 ipmitool('0x30 0x30 0x02 0xff 0x00')
                 print(color_text(RED,23 * "-" + "Fan Speed set to 0%" + 22 * "-"))
+            
+            else:
+                os.system('clear')
+                print(color_text(GREEN,26 * "-") + (color_text(RED,'Invalid Input')) + (color_text(GREEN,25 * "-")))
+                time.sleep(0.2)
+                loop = True
 
         elif ans in Quit:
             os.system('clear')
@@ -192,9 +244,10 @@ if stat == 1:
             loop = False
             
         else:
+            os.system('clear')
             print(color_text(GREEN,26 * "-") + (color_text(RED,'Invalid Input')) + (color_text(GREEN,25 * "-")))
             time.sleep(0.2)
-            loop = False
+            loop = True
 
 ## Wrong pass ##
 
