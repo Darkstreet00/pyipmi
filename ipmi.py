@@ -162,6 +162,8 @@ if stat == 1:
                 while loop2:
                     os.system('clear')
                     print (color_text(GREEN,27 * "-" + "Custom speed" + 25 * "-"))
+                    print (16 * ' ' + "(998)" + 10 * ' ' + "Back")
+                    print (16 * ' ' + "(999)" + 10 * ' ' + "Quit")
                     inp = input(color_text(GREEN,"> "))
                     try:
                         if int(inp) in range(0, 101):
@@ -176,9 +178,17 @@ if stat == 1:
                                 print(color_text(YELLOW,23 * "-" + "Fan Speed set to " + inp + "%" + 21 * "-"))
                                 loop2 = False
 
-                        elif inp == '999':
+                        elif inp == '998':
                             os.system('clear')
                             loop2 = False
+
+                        elif inp == '999':
+                            os.system('clear')
+                            os.system('clear')
+                            print (color_text(GREEN,30 * "-") + (color_text(RED,'Quit')) + (color_text(GREEN,30 * "-")))
+                            time.sleep(0.1)
+                            loop2 = False
+                            loop = False
 
                         else:
                             os.system('clear')
