@@ -45,6 +45,7 @@ In theory Support all linux system!
 ## Tested on:
 ```
 Kali Linux
+Kali Nethunter
 Linux Lite
 Ubuntu 20.04
 Debian
