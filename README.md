@@ -51,6 +51,7 @@ Ubuntu 20.04
 Debian
 MX Linux
 Arch
+Solus OS
 ```
 ## Unsupported:
 ```
